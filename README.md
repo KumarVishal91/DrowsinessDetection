@@ -10,7 +10,7 @@ A simple Python-based computer vision system that detects drowsiness (eye closur
 - Displays annotated video frames with EAR/Yawn metrics.
 - Optional alarm sound on alert (if a valid WAV file path is provided).s
 
-## Repository contents
+## Repository Contents
 
 - `drowsiness_yawn.py` - Main application script.
 - `haarcascade_frontalface_default.xml` - OpenCV pre-trained Haar cascade for face detection.
@@ -32,7 +32,7 @@ A simple Python-based computer vision system that detects drowsiness (eye closur
 - `requirements.txt` - pinned versions of libraries.
 - `README.md` - this file.
 
-## dependencies (requirements.txt)
+## Dependencies (requirements.txt)
 
 `requirements.txt` contains:
 
