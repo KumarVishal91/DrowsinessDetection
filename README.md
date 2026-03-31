@@ -8,7 +8,7 @@ A simple Python-based computer vision system that detects drowsiness (eye closur
 - Computes Eye Aspect Ratio (EAR) to identify prolonged eye closure (drowsiness).
 - Computes lip distance to identify yawning.
 - Displays annotated video frames with EAR/Yawn metrics.
-- Optional alarm sound on alert (if a valid WAV file path is provided).
+- Optional alarm sound on alert (if a valid WAV file path is provided).s
 
 ## Repository contents
 
