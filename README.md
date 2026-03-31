@@ -23,52 +23,72 @@ A simple Python-based computer vision system that detects drowsiness (eye closur
 - Python 3.8–3.11 (recommended). Python 3.12+ may have compatibility issues with older binary packages.
 - pip and virtual environment tooling.
 
-## Dependencies
 
-Install required packages:
+## Project structure
+
+- `drowsiness_yawn.py` - Main script implementing the camera loop, face detection, EAR/yawn calculation, alert display and sound thread.
+- `haarcascade_frontalface_default.xml` - OpenCV Haar cascade for face detection.
+- `shape_predictor_68_face_landmarks.dat` (not in repo) - dlib facial landmarks model (download from dlib model zoo).
+- `requirements.txt` - pinned versions of libraries.
+- `README.md` - this file.
+
+## dependencies (requirements.txt)
+
+`requirements.txt` contains:
+
+- `dlib==19.16.0` - face landmark detector (dlib shape predictor). Required for `shape_predictor_68_face_landmarks.dat` and landmark extraction.
+- `imutils==0.5.2` - convenience utilities for image resizing and video stream handling (`imutils.video.VideoStream`, `imutils.resize`).
+- `numpy==1.15.4` - numerical array operations for EAR/yawn distance math.
+- `opencv-python==4.0.0.21` - video capture, image processing and drawing APIs (face detection cascade, rectangles, contours, text overlay).
+- `playsound==1.2.2` - simple cross-platform audio playback for alert sound if provided.
+- `scipy==1.2.0` - spatial distance for Euclidean distance computation in EAR.
+
+## Setup and Run
+
+1. Clone repo:
+
+```bash
+git clone https://github.com/KumarVishal91/DrowsinessDetection.git
+cd DrowsinessDetection
+```
+
+2. (Optional but recommended) Create and activate venv:
+
+```bash
+python -m venv venv
+venv\Scripts\activate  # Windows
+source venv/bin/activate  # macOS/Linux
+```
+
+3. Install dependencies:
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
 
+5. Run the app:
+
+```powershell
+python drowsiness_yawn.py
+```
+
+6. Quit app:
+
+- Press `q` in the display window.
+
+
 ## Usage
 
-Run the app with the webcam index (default 0):
-
-```powershell
-python drowsiness_yawn.py --webcam 0 --cascade haarcascade_frontalface_default.xml --shape-predictor shape_predictor_68_face_landmarks.dat --alarm "C:\path\to\Alert.WAV"
-```
-
-Parameters:
-- `--webcam`, `-w`: Webcam index (default `0`).
-- `--cascade`, `-c`: Cascade XML file path (default `haarcascade_frontalface_default.xml`).
-- `--shape-predictor`, `-p`: dlib model path (default `shape_predictor_68_face_landmarks.dat`).
-- `--alarm`, `-a`: Optional alarm WAV path. Leave blank to disable sound.
-
-Example without sound:
-
-```powershell
-python drowsiness_yawn.py --webcam 0 --alarm ""
-```
+- The app uses `dlib` and OpenCV to detect the face and facial landmarks.
+- `EAR` is computed with `scipy.spatial.distance.euclidean`.
+- Eyes closed for 30 frames triggers drowsiness alert.
+- Lip-opening distance > 20 triggers yawn alert.
+- `playsound` asserts sound when `--alarm` path is valid.
 
 ## Keyboard controls
 
 - Press `q` to quit the window and stop the app.
-
-## Troubleshooting
-
-- If you get `ModuleNotFoundError: No module named 'scipy'`: check dependencies and re-run pip install command.
-- If `dlib` fails to compile on Windows, use a prebuilt wheel.
-- If `shape_predictor_68_face_landmarks.dat` is missing, the script will raise an error and prompt for the correct file.
-
-## Notes
-
-- If using in a production or safety-critical environment, build a more robust pipeline and avoid using the webcam-based alert as the only safety mechanism.
-- Adjust thresholds in `drowsiness_yawn.py` as needed:
-  - `EYE_AR_THRESH` (default `0.3`),
-  - `EYE_AR_CONSEC_FRAMES` (default `30`),
-  - `YAWN_THRESH` (default `20`).
 
 ## License
 
