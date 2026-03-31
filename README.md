@@ -42,6 +42,18 @@ A simple Python-based computer vision system that detects drowsiness (eye closur
 - `opencv-python==4.0.0.21` - video capture, image processing and drawing APIs (face detection cascade, rectangles, contours, text overlay).
 - `playsound==1.2.2` - simple cross-platform audio playback for alert sound if provided.
 - `scipy==1.2.0` - spatial distance for Euclidean distance computation in EAR.
+  
+## 🛠️ Tech Stack
+
+| Library | Version | Purpose |
+|---|---|---|
+| Python | 3.10.11 | Core language |
+| OpenCV | 4.x | Video capture & image processing |
+| dlib-bin | 20.0.1 | 68-point facial landmark detection |
+| imutils | 0.5.4 | Video stream utilities |
+| scipy | Latest | Euclidean distance (EAR calculation) |
+| numpy | Latest | Array operations |
+| playsound | 1.2.2 | Audio alarm playback |
 
 ## Setup and Run
 
